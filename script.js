@@ -36,12 +36,37 @@ function get(id) {
 function light() {
   // HINT: when red() finishes it calls the first argument as a function.
   // So in this example the flow is red() -> wait a second -> green()
-  red(green);
+
+  green(function() {
+    yellow(function() {
+      red(function() {
+        red(function() {
+          red(function() {
+            red();
+            yellow(light);
+          });
+        });
+      });
+    });
+  });
 }
+
 light();
 
 function light2() {
   // Same as above except the flow is green2() -> wait a second -> red2()
-  green2(red2);
+  red2(function() {
+    red2(function() {
+      red2();
+      yellow2(function() {
+        green2(function() {
+          yellow2(function() {
+            red2(light2);
+          });
+        });
+      });
+    });
+  });
 }
+
 light2();
